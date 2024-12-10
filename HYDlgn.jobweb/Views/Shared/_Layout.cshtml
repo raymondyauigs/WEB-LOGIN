@@ -9,6 +9,7 @@
     var UserLevel = HttpContext.Current.Session[Constants.Session.UserLevel]?.ToString() ?? "";
     var DisplayMessage = "";
     var DisplayCount = "";
+    string LayoutName = ViewBag.LayoutName;
     var fullmenu = (bool?)HttpContext.Current.Session[Constants.Session.FullMenu] ?? true;
     var DisplayUser = "";
     if (!string.IsNullOrEmpty($"{UserId}{UserName}"))
@@ -54,7 +55,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title by HyD/B&S</title>
+    <title>@ViewBag.LayoutName by HyD/B&S</title>
     @Scripts.Render("~/bundles/modernizr")
     @Styles.Render("~/Content/css")
     <style>
@@ -68,14 +69,14 @@
 <body>
     <div class="navbar navbar-inverse nav-bg-main navbar-fixed-top">
         <div class="container">
-            <div class="navbar-header">
+            <div class="navbar-header" style="width:100%">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <div class="iconwrap">
-                    <a href="@Url.Action("Index","Book")">
+                <div class="iconwrap" style="justify-content:center">
+                    <a href="@Url.Action("Index","Home")">
                         <span class="icon">
                             <svg fill="#FFFFFF" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                                  width="36px" height="36px" viewBox="0 0 495.398 495.398"
@@ -96,7 +97,7 @@
 </svg>
                         </span>
                     </a>
-                    @Html.ActionLink("Parapet & Damage Reports System", "Index", "Book", new { area = "" }, new { @class = "navbar-brand header-bg-main" })
+                    @Html.ActionLink(LayoutName, "Index", "Home", new { area = "" }, new { @class = "navbar-brand header-bg-main" })
                 </div>
 
             </div>
@@ -104,20 +105,7 @@
                 <ul class="nav navbar-nav">
                 </ul>
                 <div class="link10 bottom-right-me  corner4-35r">
-
-
-                    @if (!string.IsNullOrEmpty(hiddenlogon))
-                    {
-                        <a class="btn-sm btn-brick" href="@Url.Action("Login","Account",new { returnUrl=returnurl,needClear=true })">Login</a>
-                    }
-                    else if (isAdmin)
-                    {
-                        <a class="btn-sm btn-green @hiddenAccountbtn" href="@Url.Action("Index","Setting")">Setting Access</a>
-                        <a class="btn-sm btn-brick @hiddenAccountbtn" href="@Url.Action("Index","Account")">Account Access</a>
-                    }
-
                     <a class="link-yellow @hiddenlogon" href="@Url.Action("ChangePassword","Account")">@DisplayUser</a>
-
                     <a class="btn-sm btn-secondary @hiddenlogon" href="@Url.Action("Login","Account",new { returnUrl=returnurl,needClear=true } )">Log-out</a>
                 </div>
             </div>
@@ -144,7 +132,7 @@
             </span>
         </div>
         <footer>
-            <p>&copy; @DateTime.Now.Year - Parapet &amp; Barrier Damage Reports System by HyD/B&S</p>
+            <p>&copy; @DateTime.Now.Year - @ViewBag.LayoutName by HyD/B&S</p>
         </footer>
     </div>
     <script>

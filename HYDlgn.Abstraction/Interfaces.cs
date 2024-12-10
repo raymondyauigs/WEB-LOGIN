@@ -85,10 +85,14 @@ namespace HYDlgn.Abstraction
     /*User Service
      * 
      */
-
-    public interface IUserService
+    public interface IBaseService
     {
         bool TransactionNow(Func<bool> doIt, string label = null);
+        bool UpdateProc<T>(string procname, T input) where T : class;
+    }
+    public interface IUserService: IBaseService
+    {
+        
         string ImportDataTable(DataTable dt, string updateby, out int count);
 
         IEnumerable<KeyValuePair<int, string>> GetLevels(params int[] exclude);

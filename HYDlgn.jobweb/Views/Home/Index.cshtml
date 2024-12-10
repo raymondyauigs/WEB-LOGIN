@@ -1,7 +1,26 @@
-﻿
+﻿@model HYDlgn.Framework.AppModel.HomeModel
+@using HYDlgn.jobweb.Tools
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<div class="link-container">
+    <menu class="link-menu">
+        @foreach(var link in Model.Links)
+            {
+                <a class="menu-link" href="@link.Url">@link.LinkName</a>
+            }
+    </menu>
+
+</div>
+
+
+@section Scripts {
+    <script type="text/javascript" src="@Url.Content("~/Scripts/my.home.js")"></script>
+}
+
+
+@section styles {
+    <link rel="stylesheet" href="@Url.Content("~/Content/home.css")" />
+}
 

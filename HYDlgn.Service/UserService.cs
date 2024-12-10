@@ -163,6 +163,7 @@ namespace HYDlgn.Service
                         u.Disabled = false;
                     }
                     u.EncPassword = enpassword;
+                    
                     u.updatedAt = DateTime.Now;
                     u.updatedBy = editedby;
 

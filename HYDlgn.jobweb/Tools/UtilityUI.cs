@@ -637,6 +637,14 @@ namespace HYDlgn.jobweb.Tools
             return new MvcHtmlString(inputwrap.ToString() + contentwrap.ToString() + labelwrap.ToString());
         }
 
+        public static MvcHtmlString GetEmptyWrap(this HtmlHelper html, int consume, string inputcss = "")
+        {
+            var wrap = new TagBuilder("div");
+            MaterialComponentCssList.GetDivWrap(consume).ToList().ForEach(e => wrap.AddCssClass(e));
+            wrap.AddCssClass(inputcss);
+            return new MvcHtmlString(wrap.ToString());
+        }
+
         public static MvcHtmlString GetTemplate(WrapType wraptype,int consume=0,string headervalue=null,string propname=null,string holder=null,string label=null,bool isrequired=false,int spinmin=1899,int spinmax=2028,List<KeyValuePair<string,string>> optionpair=null,string selectedvalue=null,string inputcss=null,bool isdisabled=false,string urlis=null,string backcolorcss=null,string error=null, object htmlAttributes = null)
         {
             var wrap = new TagBuilder("div");

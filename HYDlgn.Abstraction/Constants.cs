@@ -405,7 +405,7 @@ namespace HYDlgn.Abstraction
 
         public static class WebKey
         {
-            public const string AppName = "pds";
+            public const string AppName = "lgn";
             public const string log4netForAdmin = "adminlognetfile";
             public const string log4netForBatch = "batchlognetfile";
 
@@ -479,7 +479,7 @@ namespace HYDlgn.Abstraction
 
             public const string returnUrl = "returnUrl";
 
-            public static string AuthorizeCookieKey = $"HYD{WebKey.AppName}.AuthorizeCookie_Key";
+            public static string AuthorizeCookieKey = $"HYD.AuthorizeCookie_Key";
             //for analysis script
             
 
@@ -537,7 +537,10 @@ namespace HYDlgn.Abstraction
             
 
             public const string SETT_USRSET = "UserReset";
-            
+
+            public const string SETT_LAYOUTNAME = "LayoutName";
+            public const string SETT_SYSTEMPFX = "System.";
+
 
         }
     }

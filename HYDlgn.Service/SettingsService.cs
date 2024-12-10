@@ -9,6 +9,7 @@ using DK= HYDlgn.Abstraction.Constants.DataKey;
 using DT = HYDlgn.Abstraction.Constants.DT;
 using HYDlgn.Framework.AppModel;
 using NPOI.OpenXmlFormats.Encryption;
+using NPOI.OpenXmlFormats.Dml.Diagram;
 
 namespace HYDlgn.Service
 {
@@ -23,8 +24,26 @@ namespace HYDlgn.Service
 
         public IEnumerable<KeyValuePair<string, string>> GetSettingFor(string type,int target=0)
         {
+            if(type == DK.SETT_SYSTEMPFX)
+            {
+                var links = db.CoreSettings.Where(e => e.SettingId.StartsWith(DK.SETT_SYSTEMPFX)).Select(e => e.SettingValue).ToArray();
+                foreach(var l in links)
+                {
+                    var lvalue = l.ItSplit("|").ToArray();
+                    yield return new KeyValuePair<string, string>(lvalue[0], lvalue[1]);
 
-            if(type == DK.SETT_LOCATION)
+                }
+
+            }
+            else if(type == DK.SETT_LAYOUTNAME)
+            {
+                var layout = db.CoreSettings.Where(e => e.SettingId == DK.SETT_LAYOUTNAME).Select(e => e.SettingValue).FirstOrDefault();
+                if (layout != null)
+                {
+                    yield return new KeyValuePair<string, string>(layout, layout);
+                }
+            }
+            else if(type == DK.SETT_LOCATION)
             {
                 var locations = db.CoreSettings.Where(e => e.SettingId == DK.SETT_LOCATION).Select(e=> e.SettingValue).FirstOrDefault();
                 if(locations!=null)

@@ -266,6 +266,7 @@
     <Content Include="Content\alertify.css" />
     <Content Include="Content\alertify.default.css" />
     <Content Include="Content\charts.min.css" />
+    <Content Include="Content\home.css" />
     <Content Include="Content\images\ms-excel.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -428,6 +429,7 @@
     <Content Include="Scripts\bootstrap5.min.js" />
     <Content Include="Scripts\bouncer.validate.js" />
     <Content Include="Scripts\keypress.min.js" />
+    <Content Include="Scripts\my.home.js" />
     <Content Include="Scripts\my.site.js" />
     <Content Include="Scripts\popper.min.js" />
     <Content Include="Scripts\tippy.min.js" />
@@ -504,6 +506,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\Test\" />
+    <Folder Include="Content\menufont\" />
     <Folder Include="Logs\" />
   </ItemGroup>
   <ItemGroup>

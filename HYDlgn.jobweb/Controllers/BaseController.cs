@@ -9,6 +9,9 @@ using System.IO.Compression;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using DK = HYDlgn.Abstraction.Constants.DataKey;
+using DT = HYDlgn.Abstraction.Constants.DT;
+
 
 using System.Data.SqlClient;
 using System.Data.Common;
@@ -26,17 +29,19 @@ namespace HYDlgn.jobweb.Controllers
         protected IErrorLog errorLog;
         protected IStdbLog stdbLog;
         protected HYDlgnEntities _db;
+        protected string layoutname;
 
         protected IUserService userService;
-        protected IBookingService bkdService;
+        
         protected ISettingService sttService;
-        protected IDriverService dvrService;
+        
 
         protected IMemoryCache mmCache;
         
 
         protected const int pagesize = 13;
         protected EditModels _mapping;
+
 
         protected override IActionInvoker CreateActionInvoker()
         {
@@ -49,8 +54,8 @@ namespace HYDlgn.jobweb.Controllers
             _db.Database.Log = (msg) => { stdbLog.LogStdb(msg.TrimEnd(Environment.NewLine.ToCharArray())); };
             sttService = DependencyResolver.Current.GetService<ISettingService>();
             userService = DependencyResolver.Current.GetService<IUserService>();
-            dvrService = DependencyResolver.Current.GetService<IDriverService>();
-            bkdService = DependencyResolver.Current.GetService<IBookingService>();
+            
+            
             _mapping =DependencyResolver.Current.GetService<EditModels>();
 
             SqlConnection sqlConn = (SqlConnection)_db.Database.Connection;
@@ -71,6 +76,8 @@ namespace HYDlgn.jobweb.Controllers
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             ViewBag.ContentWidth = "full-width";
+            var layoutsetting = sttService.GetSettingFor(DK.SETT_LAYOUTNAME).FirstOrDefault();
+            ViewBag.LayoutName = layoutsetting.Value;
             var returnUri = Request.UrlReferrer?.AbsoluteUri;
             if (returnUri != null)
             {

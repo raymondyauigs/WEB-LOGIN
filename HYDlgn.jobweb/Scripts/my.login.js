@@ -39,5 +39,6 @@ function Login() {
 }
 
 $(document).ready(function () {
+    themeLib.Core.setupTheme(null);
     setupLoginBtn('.btn-login');
 });

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +17,12 @@ namespace HYDlgn.Service
         protected HYDlgnEntities db;
         protected IMiscLog log;
 
+        public virtual bool UpdateProc<T>(string procname,T input ) where T : class
+        {
+            var paramsqls = typeof(T).GetProperties().ToDictionary(e => "@" + e.Name, e => new SqlParameter("@" + e.Name, e.GetValue(input)));
+            var result = db.Database.ExecuteSqlCommand(procname + " " + string.Join(" ", paramsqls.Keys), paramsqls.Values);
+            return result == 0;
+        }
 
         public virtual bool TransactionNow(Func<bool> doIt,string label=null)
         {

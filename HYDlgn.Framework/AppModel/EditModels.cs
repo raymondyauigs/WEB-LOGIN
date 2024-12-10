@@ -65,6 +65,16 @@ namespace HYDlgn.Framework.AppModel
 
     }
     
+    public class HomeModel
+    {
+        public List<SystemLinkModel> Links { get; set; }
+    }
+
+    public class SystemLinkModel
+    {
+        public string LinkName { get; set; }
+        public string Url { get; set; }
+    }
     
 
     [MetadataType(typeof(SettingEdit_MetaData))]

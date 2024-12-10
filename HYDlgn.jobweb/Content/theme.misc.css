@@ -66,6 +66,9 @@ p {
     height: 42vh;
     width: 100%;
 }
+.ribbon[login]{
+    background-color:rgb(61, 90, 61);
+}
 .ribbon[snapshot]{
     background-color: rgb(138, 67, 138);
 }
@@ -109,7 +112,12 @@ p {
     }
     .mdc-card .mdc-text-field--textarea textarea{
         padding-top: 5px ;
-    }        
+    }   
+.mdc-card[login]     {
+    width: 50%;
+    max-width: calc(50% - 10px);
+    margin: 5px;
+}
 
 #dropdown {
     display: none;

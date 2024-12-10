@@ -1,49 +1,70 @@
 ﻿@model HYDlgn.Framework.AppModel.LoginModel
+@using HYDlgn.jobweb.Tools
 
 @{
 
-    ViewBag.Title = "Login (Parapet & Barrier Damage Reports System)";
+    ViewBag.Title = "Login";
 }
 
 
-<h2>Login</h2>
+<main>
+    <div class="ribbon" login></div>
+    <div class="card-container">
 
-<div class="container">
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
-        <div class="form-group row">
-            <label class="col-sm-1 col-md-1">Account:</label>
-            <div class="col-sm-5 col-md-5">
-                @Html.TextBoxFor(m => m.account, htmlAttributes: new { @class = "form-control", autocomplate = "off" })
-            </div>
-        </div>
-        <div class="form-group row">
-            <label class="col-sm-1 col-md-1">Password:</label>
-            <div class="col-sm-5 col-md-5">
-                @Html.PasswordFor(m => m.password, htmlAttributes: new { @class = "form-control" })
+        <div class="mdc-card" login>
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
 
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-sm-1 col-md-1"></div>
-            <div class="col-sm-5 col-md-5">
-                <button type="button" class="btn btn-info btn-login">Login</button>
-                <button type="reset" class="btn btn-info">Reset</button>
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-sm-1 col-md-1"></div>
-            <div class="col-sm-5 col-md-5">
-                @Html.HiddenFor(m => m.returnUrl)
-            </div>
-        </div>
-    }
+                <div class="mdc-layout-grid">
+                    <div class="mdc-layout-grid__inner">
+                        <div class="mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-12-desktop">
+                            <h2>Login</h2>
+                        </div>
+                        
+                        @Html.GetInput(e => e.account, 4, true, false, htmlAttributes: new { @autocomplete = "off" })
+                        
+                        
+                        @Html.GetPassword(e => e.password, 4, true)
+                    </div>
 
-</div>
+
+                </div>
+                <div class="mdc-layout-grid">
+                    <div class="mdc-layout-grid__inner">
+                        @Html.GetEmptyWrap(1)
+                        <div class="mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-6-desktop">
+                            <button type="reset" color="primary"
+                                    class="btn-login rkmd-btn btn-red mdc-button mdc-button--raised mdc-button--secondary">
+                                <span class="mdc-button__ripple"></span>
+                                <i class="material-icons mdc-button__icon" aria-hidden="true">login</i>
+                                <span class="mdc-button__label">Login</span>
+                            </button>
+
+                            <button type="reset" color="secondary"
+                                    class="rkmd-btn btn-grey mdc-button mdc-button--raised mdc-button--leading">
+                                <span class="mdc-button__ripple"></span>
+                                <i class="material-icons mdc-button__icon" aria-hidden="true">history</i>
+                                <span class="mdc-button__label">Reset</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            }
+
+        </div>
+
+    </div>
+</main>
+
+
+
 
 @section Scripts {
 
+    @Scripts.Render("~/bundles/theme")
+    <script type="text/javascript" src="@Url.Content("~/Scripts/theme.util.js")"></script>
 
     <script type="text/javascript" src="@Url.Content("~/Scripts/JWT.common.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Scripts/my.login.js")"></script>
@@ -54,6 +75,12 @@
 
 
 @section styles {
+    <link rel="stylesheet" href="@Url.Content("~/Content/theme.matter.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/theme.material.min.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/theme.matter-select.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/theme.matter-check.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/theme.matter-btn.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/theme.misc.css")" />
 }
 
 
