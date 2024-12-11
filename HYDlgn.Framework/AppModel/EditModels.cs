@@ -64,6 +64,13 @@ namespace HYDlgn.Framework.AppModel
 
 
     }
+
+    public class LGNPasswordInput
+    {
+        public string EncPassword { get; set; }
+        public string UserId { get; set; }
+    }
+
     
     public class HomeModel
     {

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using WK = HYDlgn.Abstraction.Constants.WebKey;
 using DK = HYDlgn.Abstraction.Constants.DataKey;
 using DT = HYDlgn.Abstraction.Constants.DT;
+using HYDlgn.Framework.AppModel;
 
 namespace HYDlgn.Service
 {
@@ -162,6 +163,7 @@ namespace HYDlgn.Service
                         u.IsReset = true;
                         u.Disabled = false;
                     }
+                    UpdateProc<LGNPasswordInput>("upLGNPasswordUpdate", new LGNPasswordInput { EncPassword = enpassword, UserId = u.UserId });
                     u.EncPassword = enpassword;
                     
                     u.updatedAt = DateTime.Now;

@@ -20,7 +20,8 @@ namespace HYDlgn.Service
         public virtual bool UpdateProc<T>(string procname,T input ) where T : class
         {
             var paramsqls = typeof(T).GetProperties().ToDictionary(e => "@" + e.Name, e => new SqlParameter("@" + e.Name, e.GetValue(input)));
-            var result = db.Database.ExecuteSqlCommand(procname + " " + string.Join(" ", paramsqls.Keys), paramsqls.Values);
+            var storeproc = procname + " " + string.Join(", ", paramsqls.Keys);
+            var result = db.Database.ExecuteSqlCommand(storeproc, paramsqls.Values.ToArray());
             return result == 0;
         }
 
