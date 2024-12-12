@@ -29,8 +29,22 @@ using static HYDlgn.jobweb.Tools.MaterialHelper;
 namespace HYDlgn.jobweb.Tools
 {
 
+
+
+    public class FakeView : IView
+    {
+        public void Render(ViewContext viewContext, TextWriter writer)
+        {
+            throw new InvalidOperationException();
+        }
+    }
     public static class BundleExtensions
     {
+        public static HtmlHelper GetHtmlHelper(this Controller controller)
+        {
+            var viewContext = new ViewContext(controller.ControllerContext, new FakeView(), controller.ViewData, controller.TempData, TextWriter.Null);
+            return new HtmlHelper(viewContext, new ViewPage());
+        }
         public static void IncludeInOrder(this ScriptBundle bundle,BundleCollection collection,params string[] scripts)
         {
             var mybundle = bundle.Include(scripts);
@@ -40,6 +54,255 @@ namespace HYDlgn.jobweb.Tools
         }
     }
 
+    public static class WidgetHelper
+    {
+
+
+        public static TabHeaderWidget BeginTabHeaderWidget(this HtmlHelper htmlHelper, params string[] titles)
+        {
+            return new TabHeaderWidget(htmlHelper.ViewContext, titles);
+        }
+
+        //Please use the following in the div-container has class = "accordion arrows"
+        public static AccordionItemWidget BeginAccItemWidget(this HtmlHelper htmlHelper, int itemNumber, string itemLabel, bool toCheck)
+        {
+            return new AccordionItemWidget(htmlHelper.ViewContext, itemNumber, itemLabel, toCheck);
+        }
+        //Please use the following in the div-container has class = "accordion arrows"
+        public static AccordionHeaderWidget BeginAccHeaderWidget(this HtmlHelper htmlHelper, string title, bool withButton, bool hideButton)
+        {
+            return new AccordionHeaderWidget(htmlHelper.ViewContext, title, withButton, hideButton);
+        }
+
+
+        public class TabHeaderWidget : EmptyWidget
+        {
+            private readonly string[] tabTitles;
+
+            public TabHeaderWidget(ViewContext viewContext, params string[] titles) : base(viewContext, 2)
+            {
+                this.tabTitles = titles;
+
+                this.BeginWidget(this.tabTitles);
+            }
+            protected void BeginWidget(string[] titles)
+            {
+                var tablist = new TagBuilder("div");
+                tablist.Attributes["role"] = "tablist";
+                tablist.AddCssClass("mdc-tab-bar");
+                var scroller = new TagBuilder("div");
+                scroller.AddCssClass("mdc-tab-scroller");
+                var area = new TagBuilder("div");
+                area.AddCssClass("mdc-tab-scroller__scroll-area");
+                var scrollcontent = new TagBuilder("div");
+
+
+                foreach (var item in titles.Select((x, i) => new { index = i, title = x }))
+                {
+
+                    var tabclass = $"tabexit{item.index}";
+                    var btn = new TagBuilder("button");
+                    btn.AddCssClass("mdc-tab");
+                    btn.Attributes["tabindex"] = $"{item.index}";
+                    btn.Attributes["role"] = "tab";
+
+                    btn.AddCssClass(tabclass);
+                    if (item.index == 0)
+                    {
+                        btn.Attributes["aria-selected"] = "true";
+                        btn.AddCssClass("mdc-tab--active");
+                    }
+                    var contentspan = new TagBuilder("span");
+                    contentspan.AddCssClass("mdc-tab__content");
+                    var labelspan = new TagBuilder("span");
+                    labelspan.AddCssClass("mdc-tab__text-label");
+                    labelspan.SetInnerText(item.title);
+                    var indicator = new TagBuilder("span");
+                    indicator.AddCssClass("mdc-tab-indicator");
+                    if (item.index == 0)
+                    {
+                        indicator.AddCssClass("mdc-tab-indicator--active");
+                    }
+                    var underline = new TagBuilder("span");
+                    underline.AddCssClass("mdc-tab-indicator__content");
+                    underline.AddCssClass("mdc-tab-indicator__content--underline");
+                    var ripper = new TagBuilder("span");
+                    ripper.AddCssClass("mdc-tab__ripple");
+                    contentspan.InnerHtml = labelspan.ToString();
+                    indicator.InnerHtml = underline.ToString();
+                    btn.InnerHtml = contentspan.ToString() + indicator.ToString() + ripper.ToString();
+                    scrollcontent.InnerHtml += btn.ToString();
+
+
+
+
+
+                }
+                area.InnerHtml = scrollcontent.ToString();
+                scroller.InnerHtml = area.ToString();
+                tablist.InnerHtml = scroller.ToString();
+                var container = new TagBuilder("div");
+                container.AddCssClass("card-container");
+                var card = new TagBuilder("div");
+                card.AddCssClass("mdc-card");
+                this.textWriter.WriteLine(container.ToString(TagRenderMode.StartTag));
+                this.textWriter.WriteLine(card.ToString(TagRenderMode.StartTag));
+                this.textWriter.WriteLine(tablist.ToString());
+                //the inner expected to be array of "div with class = "content-grid" " and exactly one with "content-grid-active"
+
+            }
+        }
+
+        public class AccordionHeaderWidget : EmptyWidget
+        {
+            private readonly string headerLabel;
+            private readonly bool hasButton;
+            private readonly bool hideButton;
+            public AccordionHeaderWidget(ViewContext viewContext, string title, bool withbutton, bool tohide) : base(viewContext, withbutton ? 2 : 1)
+            {
+                this.headerLabel = title;
+                this.hasButton = withbutton;
+                this.hideButton = tohide;
+                this.BeginWidget(this.headerLabel, this.hasButton, this.hideButton);
+            }
+            protected void BeginWidget(string hlab, bool wbtn, bool hidebtn)
+            {
+                var headerwrap = new TagBuilder("div");
+                headerwrap.AddCssClass("acheader");
+                headerwrap.AddCssClass("box");
+                headerwrap.AddCssClass("header");
+                var label = new TagBuilder("label");
+                label.AddCssClass("box-title");
+                label.Attributes["for"] = "acc-close";
+                label.SetInnerText(hlab);
+                this.textWriter.WriteLine(headerwrap.ToString(TagRenderMode.StartTag));
+                this.textWriter.WriteLine(label.ToString());
+                if (wbtn)
+                {
+                    var btnwrap = new TagBuilder("div");
+                    btnwrap.AddCssClass("header");
+                    btnwrap.AddCssClass("end");
+                    btnwrap.AddCssClass("withgap");
+                    btnwrap.AddCssClass("btn-wrapper");
+                    if (hidebtn)
+                    {
+                        btnwrap.AddCssClass("hidden");
+                    }
+
+
+                    this.textWriter.WriteLine(btnwrap.ToString(TagRenderMode.StartTag));
+
+                }
+
+
+
+            }
+        }
+        public class AccordionItemWidget : EmptyWidget
+        {
+            private readonly int itemNumber;
+            private readonly string itemLabel;
+            private readonly bool itemChecked;
+            public AccordionItemWidget(ViewContext viewContext, int itemnumber, string itemlabel, bool tocheck) : base(viewContext, 2)
+            {
+                itemNumber = itemnumber;
+                itemLabel = itemlabel;
+                itemChecked = tocheck;
+                this.BeginWidget(this.itemNumber, this.itemLabel, this.itemChecked);
+            }
+            protected void BeginWidget(int inum, string ilab, bool tocheck)
+            {
+                var checkinput = new TagBuilder("input");
+                checkinput.AddCssClass("ac");
+
+
+                checkinput.Attributes["type"] = "radio";
+                checkinput.Attributes["name"] = $"accordion{inum}";
+                checkinput.Attributes["id"] = $"cb{inum}";
+                if (tocheck)
+                {
+                    checkinput.AddCssClass("ac-check");
+                    checkinput.Attributes["checked"] = "checked";
+                }
+
+                var sectionwrap = new TagBuilder("div");
+                sectionwrap.AddCssClass("acsection");
+                sectionwrap.AddCssClass("box");
+                var labeltitle = new TagBuilder("label");
+                labeltitle.AddCssClass("box-title");
+                labeltitle.Attributes["for"] = $"cb{inum}";
+                labeltitle.SetInnerText(ilab);
+                var labelclose = new TagBuilder("label");
+                labelclose.AddCssClass("box-close");
+                labelclose.Attributes["for"] = "acc-close";
+                var contentwrap = new TagBuilder("div");
+                contentwrap.AddCssClass("box-content");
+
+                this.textWriter.WriteLine(checkinput.ToString(TagRenderMode.SelfClosing));
+                this.textWriter.WriteLine(sectionwrap.ToString(TagRenderMode.StartTag));
+                this.textWriter.WriteLine(labeltitle.ToString());
+                this.textWriter.WriteLine(labelclose.ToString());
+                this.textWriter.WriteLine(contentwrap.ToString(TagRenderMode.StartTag));
+
+            }
+        }
+
+        public class EmptyWidget : IDisposable
+        {
+            protected readonly ViewContext viewContext;
+            protected readonly System.IO.TextWriter textWriter;
+            protected readonly int closeCount;
+
+
+
+            public EmptyWidget(ViewContext viewContext, int closecount = 0)
+            {
+                this.viewContext = viewContext;
+                this.textWriter = viewContext.Writer;
+                this.closeCount = closecount;
+            }
+
+            protected virtual void EndWidget()
+            {
+
+                var closetag = Enumerable.Range(0, closeCount).Select(e => "</div>").ToArray();
+
+                if (closetag.Length > 0)
+                {
+                    foreach (var c in closetag)
+                    {
+                        this.textWriter.WriteLine(c);
+                    }
+
+                }
+
+            }
+
+            #region IDisposable
+
+            private Boolean isDisposed;
+
+            public void Dispose()
+            {
+                this.Dispose(true);
+                GC.SuppressFinalize(this);
+            }
+
+            public virtual void Dispose(Boolean disposing)
+            {
+                if (!this.isDisposed)
+                {
+                    this.isDisposed = true;
+                    this.EndWidget();
+                    this.textWriter.Flush();
+                }
+            }
+
+            #endregion
+        }
+
+
+    }
     public static class MaterialHelper
     {
         public enum SvgType

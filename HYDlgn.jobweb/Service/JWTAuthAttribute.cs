@@ -1,6 +1,8 @@
 ﻿using Autofac.Features.ResolveAnything;
 using HYDlgn.Abstraction;
 using HYDlgn.Framework;
+using HYDlgn.jobweb.Controllers;
+using HYDlgn.jobweb.Tools;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,9 +31,15 @@ namespace HYDlgn.jobweb.Service
         {
             var httpContext = filterContext.HttpContext;
             var actionDescription = filterContext.ActionDescriptor;
-            var db = DependencyResolver.Current.GetService<HYDlgnEntities>();
-            
 
+            var currentPath = filterContext.RequestContext.HttpContext.Request.Url.PathAndQuery;
+
+            var baseurl = UrlHelper.GenerateContentUrl("~/", filterContext.HttpContext).TrimEnd('/');
+
+            var db = DependencyResolver.Current.GetService<HYDlgnEntities>();
+            var lg = DependencyResolver.Current.GetService<IMiscLog>();
+
+            
 
             if (actionDescription.IsDefined(typeof(AllowAnonymousAttribute), false) ||
                 actionDescription.ControllerDescriptor.IsDefined(typeof(AllowAnonymousAttribute), false)) { return; }
@@ -41,6 +49,8 @@ namespace HYDlgn.jobweb.Service
             bool isReset = false;
 
             var founduser = AppManager.UserState == null ? null : db.CoreUsers.FirstOrDefault(y => y.UserId == AppManager.UserState.UserID);
+
+            //lg.LogMisc($"your url info: {baseurl} + {currentPath} + {httpContext.Request.Url}");
 
             if (AppManager.UserState!=null)
             {
@@ -99,14 +109,18 @@ namespace HYDlgn.jobweb.Service
             }
 
             if (!isCheck && !isReset) return;
-            var currentPath = filterContext.RequestContext.HttpContext.Request.Url.PathAndQuery;
+
+
+            
+
             if (isReset )
             {
 
                 if(!(currentPath.Contains("/Login") || currentPath.Contains("/ChangePassword") ))
                 {
+                    
                     var r = new UriBuilder();
-                    r.Path = "/Account/Login";
+                    r.Path = baseurl+"/Account/Login";
                     var returnurl = filterContext.RequestContext.HttpContext.Request.Url.PathAndQuery;
 
                     var uri = r.Uri.AddQuery("needClear",true.ToString());
@@ -133,7 +147,7 @@ namespace HYDlgn.jobweb.Service
 
 
                     var r = new UriBuilder();
-                    r.Path = "/Account/Login";
+                    r.Path = baseurl+"/Account/Login";
                     var uri = r.Uri.AddQuery("returnUrl", returnurl);
                     
                     //var uri = new Uri("http:localhost//Account/Login").AddQuery("returnUrl", returnurl);

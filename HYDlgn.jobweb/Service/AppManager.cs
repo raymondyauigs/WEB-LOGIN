@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace HYDlgn.jobweb.Service
 {
@@ -35,7 +36,10 @@ namespace HYDlgn.jobweb.Service
 
                 var tokenInfo = cookie?.Value ?? "";
 
-                
+                var log = DependencyResolver.Current.GetService<IMiscLog>();
+                //log.LogMisc($"cookie received: {tokenInfo}");
+
+
                 var encodeTokenInfo = JWTHelper.GetDecodingToken(tokenInfo);
 
                 UserState userState = JsonHelper<UserState>.JsonDeserializeObject(encodeTokenInfo);

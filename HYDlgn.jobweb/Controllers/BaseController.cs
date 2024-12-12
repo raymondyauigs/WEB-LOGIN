@@ -19,6 +19,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Caching.Memory;
 using HYDlgn.Framework.AppModel;
 using WK = HYDlgn.Abstraction.Constants.WebKey;
+using HYDlgn.jobweb.Service;
 
 namespace HYDlgn.jobweb.Controllers
 {
@@ -83,7 +84,7 @@ namespace HYDlgn.jobweb.Controllers
             {
                 ViewBag.AdHocReturnUrl = new Uri(returnUri).PathAndQuery;
             }
-            
+            miscLog.LogMisc($"try to access {Request.Url.ToString()} for {AppManager.UserState?.UserID}");
 
             var tagid = (int)(Session[Constants.Session.TagId] ?? 0);
             ViewBag.UserTag = tagid > 0 ? $"u!{tagid}" : $"!restricted";

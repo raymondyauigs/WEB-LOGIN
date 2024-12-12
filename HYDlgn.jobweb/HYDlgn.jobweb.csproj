@@ -422,6 +422,15 @@
     <Content Include="App_Data\Upload\file3.pdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\menufont\Raleway-Medium.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\menufont\Raleway-Regular.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\menufont\Raleway-SemiBold.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="Properties\PublishProfiles\BfaDeploy.pubxml" />
     <None Include="Properties\PublishProfiles\DebugBFA.pubxml" />
     <None Include="Properties\PublishProfiles\DebugBKD.pubxml" />
@@ -506,7 +515,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\Test\" />
-    <Folder Include="Content\menufont\" />
     <Folder Include="Logs\" />
   </ItemGroup>
   <ItemGroup>

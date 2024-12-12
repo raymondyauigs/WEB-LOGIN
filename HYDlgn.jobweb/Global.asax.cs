@@ -87,6 +87,19 @@ namespace HYDlgn.jobweb
             var errorLog = DependencyResolver.Current.GetService<IErrorLog>();
             errorLog.LogError($"Having error messages: {string.Join("\n", lasterror.ToErrorMessageList())}");
             errorLog.LogError($"{lasterror.Message}", lasterror);
+            HttpContextBase context = new HttpContextWrapper(HttpContext.Current);
+            RouteData rd = RouteTable.Routes.GetRouteData(context);
+
+            var currentPath = Request.Url.PathAndQuery;
+            var currentOrg = Request.Url.Host;
+            var currentSch = Request.Url.Scheme;
+
+
+
+            errorLog.LogError($"you url info: {currentPath} || {currentOrg} || {currentSch} || {HttpContext.Current.Request.Path} || {HttpContext.Current.Request.Url}");
+
+            errorLog.LogError($"The corresponding Routing Controller is {rd.GetRequiredString("controller")} and Action is {rd.GetRequiredString("action")}");
+
         }
     }
 }

@@ -541,6 +541,8 @@ namespace HYDlgn.Abstraction
             public const string SETT_LAYOUTNAME = "LayoutName";
             public const string SETT_SYSTEMPFX = "System.";
 
+            public const string SETT_URLBASE = "urlbase";
+
 
         }
     }
