@@ -134,98 +134,7 @@ namespace HYDlgn.jobweb.Controllers
         }
 
 
-        [HttpGet]
-        //[Authorize]
-        [JWTAuth( level = 0)]
-        public ActionResult Register()
-        {
-            ViewBag.ContentWidth = "";
-            ViewBag.LevelNames = UtilityUI.GetSelectList<int>(userService.GetLevels(), -1);
-            ViewBag.LevelTypes = userService.GetLevels(0).Select(e => new KeyValuePair<string, string>(e.Value, $"{e.Key}")).ToList();
-            
-            
-            var defaultpwd = _db.CoreSettings.FirstOrDefault(e => e.SettingId == Constants.DataKey.DefaultPwd);
 
-            return View(new CreateUserModel { Level = 18, IsAdmin = false, Pwd = defaultpwd?.SettingValue ?? "12345678", Confirmpwd = defaultpwd?.SettingValue ?? "12345678"});
-        }
-
-
-        //[Authorize]
-        [JWTAuth( level = 0)]
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Register(CreateUserModel model)
-        {
-            ViewBag.ContentWidth = "";
-            ViewBag.LevelNames = UtilityUI.GetSelectList<int>(userService.GetLevels(), -1);
-            ViewBag.LevelTypes = userService.GetLevels(0).Select(e => new KeyValuePair<string, string>(e.Value, $"{e.Key}")).ToList();
-            
-            
-            var defaultpwd = _db.CoreSettings.FirstOrDefault(e => e.SettingId == Constants.DataKey.DefaultPwd);
-            if (ModelState.IsValid)
-            {
-                var msg = userService.EditUser(model.UserId, model.UserName, null, model.Level, model.Post, model.Division, model.IsAdmin,  User.Identity.Name,email: model.Email,password: model.Pwd ?? defaultpwd?.SettingValue ?? "12345678");
-                if (!string.IsNullOrEmpty(msg?.ToString()))
-                {
-                    ModelState.AddModelError("UserId", msg?.ToString());
-                    return View(model);
-
-                }
-
-            }
-            else
-            {
-
-
-                return View(model);
-            }
-            return Redirect("/Account");
-        }
-
-        //[Authorize]
-        [JWTAuth(level = 0)]
-        [HttpGet]
-        public ActionResult EditUser(int Id)
-        {
-            ViewBag.ContentWidth = "";
-            ViewBag.LevelNames = UtilityUI.GetSelectList<int>(userService.GetLevels(), -1);
-
-            ViewBag.LevelTypes = userService.GetLevels(0).Select(e => new KeyValuePair<string, string>(e.Value, $"{e.Key}")).ToList();
-            
-            
-
-            var edituser = _db.CoreUsers.FirstOrDefault(y => y.Id == Id);
-            var model = new EditUserModel { Id = edituser.Id, UserId = edituser.UserId, UserName = edituser.UserName, Person = edituser.Person, Level = edituser.level, Post = edituser.post, Division = edituser.Division, Email = edituser.email, IsAdmin = edituser.IsAdmin, IsPowerUser= edituser.level==9, IsVIP = edituser.level==6 || edituser.IsAdmin };
-
-            return View(model);
-        }
-
-        //[Authorize]
-        [JWTAuth( level = 0)]
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult EditUser(EditUserModel model)
-        {
-            ViewBag.ContentWidth = "";
-            ViewBag.LevelNames = UtilityUI.GetSelectList<int>(userService.GetLevels(0), -1);
-
-            ViewBag.LevelTypes = userService.GetLevels(0).Select(e => new KeyValuePair<string, string>($"{e.Value}", $"{e.Key}")).ToList();
-
-            if (ModelState.IsValid)
-            {
-                var edituser = _db.CoreUsers.FirstOrDefault(y => y.Id == model.Id);
-
-                userService.EditUser(edituser.UserId, model.UserName, model.Person, model.Level, model.Post, model.Division, model.IsAdmin, User.Identity.Name,adminScope: edituser.AdminScope,email: model.Email, Id: edituser.Id);
-
-            }
-            else
-            {
-
-
-                return View(model);
-            }
-            return Redirect("/Account");
-        }
 
 
         [JWTAuth(level =99999)]
@@ -255,7 +164,7 @@ namespace HYDlgn.jobweb.Controllers
 
                 var passwed = userService.ChangeUserPassword(changeuser.UserId, model.Confirmpwd, User.Identity.Name, model.OldPwd);
                 if (passwed)
-                    return Redirect("/Home");
+                    return RedirectToAction("Index","Home");
                 if (changeuser.Disabled)
                 {
                     ModelState.AddModelError("OldPwd", "The account is disabled");
@@ -308,7 +217,7 @@ namespace HYDlgn.jobweb.Controllers
                 }
 
 
-                userService.ChangeUserPassword(changeuser.UserId, model.Confirmpwd, User.Identity.Name);
+                userService.TransactionNow(()=> userService.ChangeUserPassword(changeuser.UserId, model.Confirmpwd, User.Identity.Name),"Reset Password");
 
 
 
