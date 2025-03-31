@@ -4,14 +4,21 @@
     ViewBag.Title = "Index";
 }
 
-<div class="link-container">
-    <menu class="link-menu">
-        @foreach(var link in Model.Links)
-            {
-                <a class="menu-link" href="@link.Url">@link.LinkName</a>
-            }
-    </menu>
-
+<div class="thumbnail-container">
+    @foreach (var link in Model.Links)
+    {
+        <div class="thumbnail">
+            <div class="modal-wrapper">
+                <a href="@link.Url">
+                    <img src="@Url.Content("~/Content/images/"+ (link.LinkName.Contains("Submission") ? "design_submission.png": (link.LinkName.Contains("Register") ? "job_register.png": "express_permit.png")))" />
+                </a>
+                <span class="span-1 hidden">@link.LinkName</span>
+            </div>
+            
+            
+            
+        </div>
+    }
 </div>
 
 

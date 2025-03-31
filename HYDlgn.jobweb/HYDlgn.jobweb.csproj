@@ -267,6 +267,9 @@
     <Content Include="Content\alertify.default.css" />
     <Content Include="Content\charts.min.css" />
     <Content Include="Content\home.css" />
+    <Content Include="Content\images\design_submission.png" />
+    <Content Include="Content\images\job_register.png" />
+    <Content Include="Content\images\express_permit.png" />
     <Content Include="Content\images\ms-excel.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

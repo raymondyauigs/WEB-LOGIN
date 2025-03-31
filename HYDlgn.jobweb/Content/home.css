@@ -48,3 +48,75 @@ menu.link-menu {
             transform: scale(1.1);
             background: rgba(255, 255, 255, 0.8);
         }
+
+.thumbnail-container {
+    background: khaki;
+    width: 100vw;
+    height: calc(100vh - 250px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.thumbnail {
+    margin: 10px;
+    
+    background: #ffffff;
+    box-shadow: 0 0 3px rgba(0, 0, 0, .15);
+    display: inline-block;
+    border-radius: 20px;
+    overflow: hidden;
+    transitio: all .2s;
+    height: auto;
+    width: 350px;
+    height: 300px;
+}
+
+    .thumbnail > label {
+        width: 100%;
+        height: 100%;
+        color: #000000;
+        cursor: pointer;
+        display: inline-block;
+        font-weight: bold;
+        overflow: hidden;
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+
+    .thumbnail:hover {
+        box-shadow: 0 2px 10px rgba(0,0,0,.9);
+    }
+
+.modal-wrapper {
+    /*     padding: 1em 0; */
+    position: relative;
+    margin: 0 auto;
+    max-width: 350px;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+    .modal-wrapper img {
+        min-width: 100%;
+        width: 100%;
+        height: 75%;
+        margin-top: 10px;
+    }
+
+
+.span-1 {
+    margin-top: 5px;
+    font-size: 2.1rem;
+    font-weight: bolder;
+}
+
+.span-2 {
+    margin-top: 3px;
+    font-size: smaller;
+    font-weight: bolder;
+}
+    
