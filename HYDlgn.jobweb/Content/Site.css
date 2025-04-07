@@ -117,6 +117,20 @@ body {
     position: absolute;
     bottom: 0px;
     right: 0px;
+    font-size:20px;
+}
+.bottom-right-me a.btn-sm {
+    font-size: 20px !important;
+}
+.bottom-top-me {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    font-size: 20px;
+    margin-top: 20px;
+}
+.bottom-top-me a.btn-sm {
+    font-size: 20px !important;
 }
 .ml-10{
     margin-left:10px;
@@ -645,3 +659,4 @@ div.layoutheader-spanner{
 body.layoutbg-pic {
     background: url('./images/BS_Portal_Homepage_Backgrond.png');
 }
+

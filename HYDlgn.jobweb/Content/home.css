@@ -50,7 +50,7 @@ menu.link-menu {
         }
 
 .thumbnail-container {
-    background: khaki;
+    background-color:rgba(0,0,0,0);
     width: 100vw;
     height: calc(100vh - 250px);
     display: flex;

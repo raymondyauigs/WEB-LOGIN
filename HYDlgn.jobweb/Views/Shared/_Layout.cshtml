@@ -30,7 +30,7 @@
     }
     var returnurl = Request.Url.PathAndQuery;
     var hiddenlogon = string.IsNullOrEmpty(DisplayUser) ? "hidden" : "";
-    var hiddenmessage = string.IsNullOrEmpty(DisplayMessage) ? "hidden" : "";
+    var hiddenhomeicon = string.IsNullOrEmpty(DisplayUser) ? "" : "hidden";
 
     var userLevelvalue = 99999;
     var isAdmin = HttpContext.Current.Session[Constants.Session.IsAdmin] != null && (bool)HttpContext.Current.Session[Constants.Session.IsAdmin];
@@ -91,7 +91,7 @@
 
                     <div class="layoutheader-spanner"></div>
                     <a href="@Url.Action("Index","Home")">
-                        <span class="icon">
+                        <span class="icon @hiddenhomeicon">
                             <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                                  width="84px" height="84px"
                                  xml:space="preserve">
@@ -109,8 +109,8 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                 </ul>
-                <div class="link10 bottom-right-me  corner4-35r">
-                    <a class="link-yellow @hiddenlogon" href="@Url.Action("ChangePassword","Account")">@UserId</a>
+                <div class="link10 bottom-top-me  corner4-35r">
+                    <a class="link-gray @hiddenlogon" href="@Url.Action("ChangePassword","Account")">@UserId</a>
                     <a class="btn-sm btn-secondary @hiddenlogon" href="@Url.Action("Login","Account",new { returnUrl=returnurl,needClear=true } )">Log-out</a>
                 </div>
             </div>
