@@ -78,7 +78,11 @@ namespace HYDlgn.jobweb.Controllers
         {
             ViewBag.ContentWidth = "full-width";
             var layoutsetting = sttService.GetSettingFor(DK.SETT_LAYOUTNAME).FirstOrDefault();
+            var bgsetting = sttService.GetSettingFor(DK.SETT_BGNAME).FirstOrDefault();
+            var subbgsetting = sttService.GetSettingFor(DK.SETT_BGSUBNAME).FirstOrDefault();
             ViewBag.LayoutName = layoutsetting.Value;
+            ViewBag.BackName = bgsetting.Value;
+            ViewBag.BackSubName = subbgsetting.Value;
             var returnUri = Request.UrlReferrer?.AbsoluteUri;
             if (returnUri != null)
             {

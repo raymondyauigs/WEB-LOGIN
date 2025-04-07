@@ -67,9 +67,14 @@ p {
     width: 100%;
 }
 .ribbon[login]{
-    background-color:rgb(61, 90, 61);
+    background-color:rgb(61, 90, 61,0);
 }
-.ribbon[snapshot]{
+main.login-page-wrapper {
+    margin-top: 250px;
+
+}
+
+.ribbon[snapshot] {
     background-color: rgb(138, 67, 138);
 }
 .header {

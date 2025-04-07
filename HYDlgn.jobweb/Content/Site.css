@@ -85,6 +85,14 @@ body {
 .nav-bg-main {
     background-color:rgb(126, 126, 101);
     
+
+}
+.nav-bg-main.noborder {
+    border:none !important;
+}
+
+.nav-bg-main.layoutbg-color {
+    background-color: rgba(0,0,0,0);
 }
 .nav-bg-main ul.nav > li > a{
     color:greenyellow;
@@ -479,6 +487,11 @@ label.bigger-text {
     display: flex;
 
 }
+.loginicon-column-center {
+    flex-direction: column;
+    
+    align-items: center;
+}
 
 .icon {
     flex: 0 0 auto;
@@ -578,7 +591,29 @@ label.bigger-text {
     position: relative !important;
 }
 
-
+.layoutheader-BackPos {
+    position: absolute;
+    left: 0;
+    margin-left: 20px;
+    margin-top: 20px;
+}
+    .layoutheader-BackPos p {
+        
+        
+        
+    }
+.layoutheader-BackName {
+    font-weight: 700;
+    font-style: normal;
+    font-size: 3rem;
+    color: #727070;
+}
+.layoutheader-BackSubName {
+    margin-top: -25px;
+    font-style: normal;
+    font-size: 3rem;
+    color: #727070;
+}
 
 
 div.bouncer-validation.near-top {
@@ -596,4 +631,17 @@ div.bouncer-validation.near-top {
     display: flex;
     column-gap: 2px;
     
+}
+
+a.navbar-brand.layoutheader-name {
+    color: #004aad;
+    font-size: 64px;
+    font-weight:normal;
+}
+
+div.layoutheader-spanner{
+    padding-top: 100px;
+}
+body.layoutbg-pic {
+    background: url('./images/BS_Portal_Homepage_Backgrond.png');
 }

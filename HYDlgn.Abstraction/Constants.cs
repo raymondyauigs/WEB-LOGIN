@@ -539,6 +539,8 @@ namespace HYDlgn.Abstraction
             public const string SETT_USRSET = "UserReset";
 
             public const string SETT_LAYOUTNAME = "LayoutName";
+            public const string SETT_BGNAME = "BackgroundName";
+            public const string SETT_BGSUBNAME = "BackgroundSubName";
             public const string SETT_SYSTEMPFX = "System.";
 
             public const string SETT_URLBASE = "urlbase";

@@ -35,9 +35,9 @@ namespace HYDlgn.Service
                 }
 
             }
-            else if(type == DK.SETT_LAYOUTNAME)
+            else if(new[] { DK.SETT_LAYOUTNAME ,DK.SETT_BGNAME, DK.SETT_BGSUBNAME}.Contains(type))
             {
-                var layout = db.CoreSettings.Where(e => e.SettingId == DK.SETT_LAYOUTNAME).Select(e => e.SettingValue).FirstOrDefault();
+                var layout = db.CoreSettings.Where(e => e.SettingId == type).Select(e => e.SettingValue).FirstOrDefault();
                 if (layout != null)
                 {
                     yield return new KeyValuePair<string, string>(layout, layout);
