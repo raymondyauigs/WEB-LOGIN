@@ -655,7 +655,7 @@ label.bigger-text {
 }
 
 .layoutheader-BackSubName {
-    margin-top: -25px;
+    margin-top: -20px;
     font-style: normal;
     font-size: 3rem;
     color: #727070;
@@ -685,7 +685,11 @@ a.navbar-brand.layoutheader-name {
 
     a.navbar-brand.layoutheader-name[login='true'] {
         font-size: 48px;
-        margin-top: -30px;
+        
+        position:absolute;
+        width: 100%;
+        display:flex;
+        justify-content:center;
     }
 
 div.layoutheader-spanner {
@@ -695,3 +699,6 @@ div.layoutheader-spanner {
 body.layoutbg-pic {
     background: url('./images/BS_Portal_Homepage_Backgrond.png');
 }
+    body.layoutbg-pic[login='true'] {
+        background: url('./images/BS_Portal_Secondpage_Backgrond.png');
+    }
