@@ -50,12 +50,9 @@ menu.link-menu {
         }
 
 .thumbnail-container {
-    background-color:rgba(0,0,0,0);
-    width: 100vw;
-    height: calc(100vh - 250px);
+   
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: row;
 }
 
 .thumbnail {
@@ -68,8 +65,8 @@ menu.link-menu {
     overflow: hidden;
     transitio: all .2s;
     height: auto;
-    width: 350px;
-    height: 300px;
+    width: 120px;
+    height: 105px;
 }
 
     .thumbnail > label {
@@ -119,4 +116,15 @@ menu.link-menu {
     font-size: smaller;
     font-weight: bolder;
 }
+
+.group-portal {
     
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index:100;
+    width: 264px;
+    margin-left: 25px;
+    margin-right: 25px;
+    margin-top: 150px;
+}

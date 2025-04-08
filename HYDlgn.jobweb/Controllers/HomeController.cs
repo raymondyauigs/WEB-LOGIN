@@ -26,8 +26,11 @@ namespace HYDlgn.jobweb.Controllers
 
             //ZipperOne.Create(Path.Combine(outpath, "files.zip"),"", files);
             var model = new HomeModel();
-            model.Links = sttService.GetSettingFor(DK.SETT_SYSTEMPFX).Select(e => new SystemLinkModel { LinkName = e.Key, Url = e.Value }).ToList();
+            model.Groups = new[] { "B", "S", "T", "R" };
+            model.Links = new List<SystemLinkModel>();
 
+            model.Links.AddRange(sttService.GetSettingFor(DK.SETT_SYSTEMPFX).Select(e => new SystemLinkModel { LinkName = e.Key, Url = e.Value, LinkGroup = "S" }));
+            model.Links.AddRange(sttService.GetSettingFor(DK.SETT_PROJCTPFX).Select(e => new SystemLinkModel { LinkName = e.Key, Url = e.Value, LinkGroup = "T" }));
 
             return View(model);
         }

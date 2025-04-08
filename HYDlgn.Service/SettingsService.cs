@@ -24,9 +24,9 @@ namespace HYDlgn.Service
 
         public IEnumerable<KeyValuePair<string, string>> GetSettingFor(string type,int target=0)
         {
-            if(type == DK.SETT_SYSTEMPFX)
+            if(new[] { DK.SETT_SYSTEMPFX ,DK.SETT_PROJCTPFX}.Contains(type))
             {
-                var links = db.CoreSettings.Where(e => e.SettingId.StartsWith(DK.SETT_SYSTEMPFX)).Select(e => e.SettingValue).ToArray();
+                var links = db.CoreSettings.Where(e => e.SettingId.StartsWith(type)).Select(e => e.SettingValue).ToArray();
                 foreach(var l in links)
                 {
                     var lvalue = l.ItSplit("|").ToArray();

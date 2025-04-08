@@ -75,10 +75,15 @@ namespace HYDlgn.Framework.AppModel
     public class HomeModel
     {
         public List<SystemLinkModel> Links { get; set; }
+        public string[] Groups { get; set; }
+
+
+
     }
 
     public class SystemLinkModel
     {
+        public string LinkGroup { get; set; }
         public string LinkName { get; set; }
         public string Url { get; set; }
     }

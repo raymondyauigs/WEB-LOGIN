@@ -31,6 +31,7 @@
     var returnurl = Request.Url.PathAndQuery;
     var hiddenlogon = string.IsNullOrEmpty(DisplayUser) ? "hidden" : "";
     var hiddenhomeicon = string.IsNullOrEmpty(DisplayUser) ? "" : "hidden";
+    var loginattr = string.IsNullOrEmpty(DisplayUser) ? "false" : "true";
 
     var userLevelvalue = 99999;
     var isAdmin = HttpContext.Current.Session[Constants.Session.IsAdmin] != null && (bool)HttpContext.Current.Session[Constants.Session.IsAdmin];
@@ -79,10 +80,10 @@
                     <span class="icon-bar"></span>
                 </button>
                 <div class="layoutheader-BackPos">
-                    <p class="layoutheader-BackName">
+                    <p class="layoutheader-BackName" >
                         @BackName
                     </p>
-                    <p class="layoutheader-BackSubName">
+                    <p class="layoutheader-BackSubName" >
                         @BackSubName
                     </p>
                 </div>
@@ -101,7 +102,7 @@
 </svg>
                         </span>
                     </a>
-                    @Html.ActionLink(LayoutName, "Index", "Home", new { area = "" }, new { @class = "navbar-brand header-bg-main layoutheader-name" })
+                    @Html.ActionLink(LayoutName, "Index", "Home", new { area = "" }, new { @class = "navbar-brand header-bg-main layoutheader-name" , login=$"{loginattr}" })
 
                 </div>
 
@@ -111,7 +112,7 @@
                 </ul>
                 <div class="link10 bottom-top-me  corner4-35r">
                     <a class="link-gray @hiddenlogon" href="@Url.Action("ChangePassword","Account")">@UserId</a>
-                    <a class="btn-sm btn-secondary @hiddenlogon" href="@Url.Action("Login","Account",new { returnUrl=returnurl,needClear=true } )">Log-out</a>
+                    <a class="btn-round-big btn-secondary-cool @hiddenlogon" href="@Url.Action("Login","Account",new { returnUrl=returnurl,needClear=true } )">Log-out</a>
                 </div>
             </div>
 
