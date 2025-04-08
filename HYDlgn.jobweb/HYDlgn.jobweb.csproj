@@ -267,6 +267,8 @@
     <Content Include="Content\alertify.default.css" />
     <Content Include="Content\charts.min.css" />
     <Content Include="Content\home.css" />
+    <Content Include="Content\images\B0_Car.png" />
+    <Content Include="Content\images\B1_Room.png" />
     <Content Include="Content\images\B_column.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
