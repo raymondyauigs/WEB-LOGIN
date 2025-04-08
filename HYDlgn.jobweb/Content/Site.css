@@ -685,6 +685,7 @@ a.navbar-brand.layoutheader-name {
 
     a.navbar-brand.layoutheader-name[login='true'] {
         font-size: 48px;
+        margin-top: -30px;
     }
 
 div.layoutheader-spanner {

@@ -7,22 +7,64 @@
 <div class="thumbnail-container">
     @foreach (var group in Model.Groups)
     {
+        var groupname = "";
+        switch (group)
+        {
+            case "B":
+                groupname = "Common Portal";
+                break;
+
+            case "S":
+                groupname = "General Team Portal";
+                break;
+            case "T":
+                groupname = "Project Team Portal";
+                break;
+            case "R":
+                groupname = "IT Inventory Record";
+                break;
+
+        }
+
         <div class="group-portal" group="@group">
             <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                 width="264px" height="640px" style="position:absolute;"
+                 width="300px" height="729px" style="position:absolute;"
                  xml:space="preserve">
-<g>
-<image xlink:href="@Url.Content("~/Content/images/"+group+"_column.png")" width="264px" height="640px"></image>
-</g>
-</svg>
-
-            @foreach (var link in Model.Links.Where(e => e.LinkGroup == group))
+                <g>
+                <image xlink:href="@Url.Content("~/Content/images/"+group+"_column.png")" width="300px" height="729px"></image>
+                </g>
+            </svg>
+            <div class="group-spanner" style="z-index:1000"><span >@groupname</span></div>
+            @foreach ((var i, var link) in Model.Links.Where(e => e.LinkGroup == group).Select((link,i)=> ( i,link) ))
             {
+                var imagename = "";
+                switch (group + i)
+                {
+                    case "T0":
+                        imagename = "T0_PIS.png";
+                        break;
+                    case "T1":
+                        imagename = "T1_Parapet.png";
+                        break;
+                    case "T2":
+                        imagename = "T2_BFA.png";
+                        break;
+                    case "S0":
+                        imagename = "S0_Design_Submission.png";
+                        break;
+                    case "S1":
+                        imagename = "S1_EWP.png";
+                        break;
+                    case "S2":
+                        imagename = "S2_EWPA_Register.png";
+                        break;
 
-                <div class="thumbnail">
+
+                }
+                <div class="thumbnail-trans">
                     <div class="modal-wrapper">
                         <a href="@link.Url">
-                            <img src="@Url.Content("~/Content/images/"+ (link.LinkName.Contains("Submission") ? "design_submission.png": (link.LinkName.Contains("Register") ? "job_register.png": "express_permit.png")))" />
+                            <img src="@Url.Content("~/Content/images/"+imagename )" />
                         </a>
                         <span class="span-1 hidden">@link.LinkName</span>
                     </div>

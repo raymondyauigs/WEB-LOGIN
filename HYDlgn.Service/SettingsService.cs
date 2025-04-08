@@ -26,7 +26,7 @@ namespace HYDlgn.Service
         {
             if(new[] { DK.SETT_SYSTEMPFX ,DK.SETT_PROJCTPFX}.Contains(type))
             {
-                var links = db.CoreSettings.Where(e => e.SettingId.StartsWith(type)).Select(e => e.SettingValue).ToArray();
+                var links = db.CoreSettings.Where(e => e.SettingId.StartsWith(type)).OrderBy(e=> e.SettingId).Select(e => e.SettingValue).ToArray();
                 foreach(var l in links)
                 {
                     var lvalue = l.ItSplit("|").ToArray();

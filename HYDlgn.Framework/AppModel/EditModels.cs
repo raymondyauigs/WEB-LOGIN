@@ -85,6 +85,8 @@ namespace HYDlgn.Framework.AppModel
     {
         public string LinkGroup { get; set; }
         public string LinkName { get; set; }
+
+        public int iconindex { get; set; }
         public string Url { get; set; }
     }
     

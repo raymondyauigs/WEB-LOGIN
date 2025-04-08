@@ -50,26 +50,25 @@ menu.link-menu {
         }
 
 .thumbnail-container {
-   
     display: flex;
     flex-direction: row;
+    justify-content: center;
+    column-gap: 25px;
 }
 
-.thumbnail {
-    margin: 10px;
+.thumbnail-trans {
+    margin-top: -15px;
     
-    background: #ffffff;
-    box-shadow: 0 0 3px rgba(0, 0, 0, .15);
     display: inline-block;
     border-radius: 20px;
     overflow: hidden;
     transitio: all .2s;
     height: auto;
-    width: 120px;
-    height: 105px;
+    width: 200px;
+    height: 180px;
 }
 
-    .thumbnail > label {
+    .thumbnail-trans > label {
         width: 100%;
         height: 100%;
         color: #000000;
@@ -81,7 +80,7 @@ menu.link-menu {
         background-repeat: no-repeat;
     }
 
-    .thumbnail:hover {
+    .thumbnail-trans:hover {
         box-shadow: 0 2px 10px rgba(0,0,0,.9);
     }
 
@@ -100,7 +99,7 @@ menu.link-menu {
     .modal-wrapper img {
         min-width: 100%;
         width: 100%;
-        height: 75%;
+        height: 80%;
         margin-top: 10px;
     }
 
@@ -122,9 +121,20 @@ menu.link-menu {
     display: flex;
     flex-direction: column;
     align-items: center;
+   
     z-index:100;
     width: 264px;
     margin-left: 25px;
     margin-right: 25px;
-    margin-top: 150px;
+    margin-top: 100px;
+    
+}
+
+.group-spanner {
+    height: 210px;
+    padding-top: 140px;
+    padding-bottom: 50px;
+}
+.group-spanner span {
+    font-size: 24px;
 }

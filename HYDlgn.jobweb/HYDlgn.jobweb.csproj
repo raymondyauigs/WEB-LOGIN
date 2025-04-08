@@ -294,19 +294,19 @@
     <Content Include="Content\images\T_column.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\images\T-BFA.png">
+    <Content Include="Content\images\T2_BFA.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\images\T-contact.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\images\T-Design Submission.png">
+    <Content Include="Content\images\S0_Design_Submission.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\images\T-EWPA Job Register.png">
+    <Content Include="Content\images\S2_EWPA_Register.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\images\T-EWPS.png">
+    <Content Include="Content\images\S1_EWP.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\images\T-home.png">
@@ -321,13 +321,13 @@
     <Content Include="Content\images\T-mail.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\images\T-Parapet &amp; Barrier.png">
+    <Content Include="Content\images\T1_Parapet.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\images\T-password.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\images\T-PIS.png">
+    <Content Include="Content\images\T0_PIS.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\images\T-tele.png">
