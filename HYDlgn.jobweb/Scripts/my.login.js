@@ -1,9 +1,22 @@
 ﻿
 function setupLoginBtn(loginbtn) {
+    var listener = new window.keypress.Listener();
+    listener.register_many([
+        {
+            keys: "enter",
+            on_release: function (e) {
+                Login();
+
+
+                return true;
+            },
+        },
+    ]);
     $(loginbtn).click(function (e) {
         Login();
     });
 }
+
 
 function Login() {
     var paras =

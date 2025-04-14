@@ -48,30 +48,30 @@
                         break;
 
 
-                    case "T0":
-                        imagename = "T0_PIS.png";
+                    case "T2":
+                        imagename = "T2_PIS.png";
                         break;
                     case "T1":
                         imagename = "T1_Parapet.png";
                         break;
-                    case "T2":
-                        imagename = "T2_BFA.png";
+                    case "T0":
+                        imagename = "T0_BFA.png";
                         break;
                     case "S0":
                         imagename = "S0_Design_Submission.png";
                         break;
-                    case "S1":
-                        imagename = "S1_EWP.png";
-                        break;
                     case "S2":
-                        imagename = "S2_EWPA_Register.png";
+                        imagename = "S2_EWP.png";
+                        break;
+                    case "S1":
+                        imagename = "S1_EWPA_Register.png";
                         break;
 
 
                 }
                 <div class="thumbnail-trans">
                     <div class="modal-wrapper">
-                        <a href="@link.Url">
+                        <a href="@link.Url" target="_blank">
                             <img src="@Url.Content("~/Content/images/"+imagename )" />
                         </a>
                         <span class="span-1 hidden">@link.LinkName</span>
