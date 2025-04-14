@@ -123,7 +123,7 @@
     <div class="Loading loading-wrapper">
         <div class="Loading-progress"></div>
     </div>
-    @Html.ActionLink(LayoutName, "Index", "Home", new { area = "" }, new{@class = "navbar-brand header-bg-main layoutheader-name", login=loginattr})
+    @Html.ActionLink(LayoutName, "Index", "Home", new { area = "" }, new { @class = "navbar-brand header-bg-main layoutheader-name", login = loginattr })
     <div class="container body-content @ViewBag.ContentWidth">
 
 
@@ -138,10 +138,32 @@
                 </svg>
             </span>
         </div>
-        <footer class="@hiddenlogon">
-            <p>&copy; @DateTime.Now.Year - @ViewBag.LayoutName by HyD/B&S</p>
-        </footer>
+
     </div>
+    <footer class="contactfooter" login="@loginattr">
+        <h3>Contact Us</h3>
+        <div class="contact-info">
+            <div>
+                <span><img src="@Url.Content("~/Content/images/T-contact.png")" /></span>
+
+                <p>PTO</p>
+                <p>STO4</p>
+            </div>
+            <div>
+                <span><img src="@Url.Content("~/Content/images/T-tele.png")" /></span>
+
+                <p>3903 6524</p>
+                <p>3903 6526</p>
+            </div>
+            <div>
+                <span><img src="@Url.Content("~/Content/images/T-mail.png")" /></span>
+
+                <p>pto.bstr@hyd.gov.hk</p>
+                <p>sto4.bstr@hyd.gov.hk</p>
+            </div>
+        </div>
+
+    </footer>
     <script>
 
         var _isAdmin = @(isAdmin.ToString().ToLower());

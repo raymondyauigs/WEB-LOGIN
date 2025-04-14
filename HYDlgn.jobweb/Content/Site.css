@@ -698,7 +698,53 @@ div.layoutheader-spanner {
 
 body.layoutbg-pic {
     background: url('./images/BS_Portal_Homepage_Backgrond.png');
+    height: 100vh;
 }
     body.layoutbg-pic[login='true'] {
         background: url('./images/BS_Portal_Secondpage_Backgrond.png');
     }
+
+a.navbar-brand.layoutheader-name[login='false'] {
+    display:none;
+}
+
+.contactfooter[login='true'] {
+    display: none;
+}
+.contactfooter[login='false'] {
+    position: relative;   
+    height: 180px;
+    float:right;
+    margin-right:15px;
+    
+}
+.contactfooter h3 {
+    margin-left: 15%;
+    color: #004aad;
+    font-weight:700;
+}
+.contactfooter .contact-info {
+    display: flex;
+    flex-direction: row;
+    width: 450px;
+    justify-content: space-evenly;
+}
+
+.contact-info div {
+    flex-basis: 100px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+    .contact-info div img {
+        height: 50px;
+        margin-bottom: 10px;
+    }
+    .contact-info div p {
+        font-size: smaller;
+        font-style: normal;
+        color: #727070;
+    }
+
+
