@@ -37,7 +37,7 @@ namespace HYDlgn.Framework.AppModel
         [Display(Name = "Id")]
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "Please Enter Username..")]
+        [Required(ErrorMessage = "Please Enter Username Or Post..")]
         [Display(Name = "User Name")]
         public string UserName { get; set; }
 

@@ -146,7 +146,7 @@ namespace HYDlgn.jobweb.Controllers
             var changeuser = _db.CoreUsers.FirstOrDefault(y => y.UserId == userid);
             ViewBag.RedirectUrl = changeuser.IsAdmin ? Url.Action("Index", "Account") : Url.Action("Index", "Home");
 
-            var model = new ChangePasswordModel { Id = changeuser.Id, UserName = changeuser.UserName, ReturnUrl = ReturnUrl ?? Request.UrlReferrer.PathAndQuery };
+            var model = new ChangePasswordModel { Id = changeuser.Id, UserName = changeuser.UserId, ReturnUrl = ReturnUrl ?? Request.UrlReferrer.PathAndQuery };
             return View(model);
         }
 
