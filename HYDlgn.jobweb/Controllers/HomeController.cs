@@ -26,11 +26,11 @@ namespace HYDlgn.jobweb.Controllers
 
             //ZipperOne.Create(Path.Combine(outpath, "files.zip"),"", files);
             var model = new HomeModel();
-            model.Groups = new[] { "B", "S", "T", "R" };
+            model.Groups = new[] { "B", "S", "T" };
             model.Links = new List<SystemLinkModel>();
-            model.Links.AddRange(sttService.GetSettingFor(DK.SETT_COMMONPFX).Select(e => new SystemLinkModel { LinkName = e.Key, Url = e.Value, LinkGroup = "B" }));
-            model.Links.AddRange(sttService.GetSettingFor(DK.SETT_SYSTEMPFX).Select(e => new SystemLinkModel { LinkName = e.Key, Url = e.Value, LinkGroup = "S" }));
-            model.Links.AddRange(sttService.GetSettingFor(DK.SETT_PROJCTPFX).Select(e => new SystemLinkModel { LinkName = e.Key, Url = e.Value, LinkGroup = "T" }));
+            model.Links.AddRange(sttService.GetSettingFor(DK.SETT_COMMONPFX).Select(e => new SystemLinkModel { LinkName = e.Key, Url = e.Value, LinkGroup = "B", ImagePrefix="B" }));
+            model.Links.AddRange(sttService.GetSettingFor(DK.SETT_SYSTEMPFX).Select(e => new SystemLinkModel { LinkName = e.Key, Url = e.Value, LinkGroup = "S", ImagePrefix="And" }));
+            model.Links.AddRange(sttService.GetSettingFor(DK.SETT_PROJCTPFX).Select(e => new SystemLinkModel { LinkName = e.Key, Url = e.Value, LinkGroup = "T", ImagePrefix="S" }));
 
             return View(model);
         }

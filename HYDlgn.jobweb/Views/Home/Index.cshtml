@@ -8,6 +8,8 @@
     @foreach (var group in Model.Groups)
     {
         var groupname = "";
+        var firstgrouplink = Model.Links.FirstOrDefault(e => e.LinkGroup == group);
+        var imageprefix = firstgrouplink?.ImagePrefix ?? group;
         switch (group)
         {
             case "B":
@@ -31,7 +33,7 @@
                  width="300px" height="729px" style="position:absolute;"
                  xml:space="preserve">
                 <g>
-                <image xlink:href="@Url.Content("~/Content/images/"+group+"_column.png")" width="300px" height="729px"></image>
+                <image xlink:href="@Url.Content("~/Content/images/"+imageprefix+"_column.png")" width="300px" height="729px"></image>
                 </g>
             </svg>
             <div class="group-spanner" style="z-index:1000"><span >@groupname</span></div>
