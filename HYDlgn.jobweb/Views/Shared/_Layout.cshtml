@@ -79,7 +79,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <div class="layoutheader-BackPos">
+                <div class="layoutheader-BackPos" login="@loginattr">
                     <p class="layoutheader-BackName">
                         @BackName
                     </p>
@@ -122,6 +122,14 @@
     </div>
     <div class="Loading loading-wrapper">
         <div class="Loading-progress"></div>
+    </div>
+    <div class="layoutheader-BackPos-login" login="@loginattr">
+        <p class="layoutheader-BackName">
+            @BackName
+        </p>
+        <p class="layoutheader-BackSubName">
+            @BackSubName
+        </p>
     </div>
     @Html.ActionLink(LayoutName, "Index", "Home", new { area = "" }, new { @class = "navbar-brand header-bg-main layoutheader-name", login = loginattr })
     <div class="container body-content @ViewBag.ContentWidth">

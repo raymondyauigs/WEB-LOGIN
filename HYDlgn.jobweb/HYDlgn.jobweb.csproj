@@ -267,10 +267,13 @@
     <Content Include="Content\alertify.default.css" />
     <Content Include="Content\charts.min.css" />
     <Content Include="Content\home.css" />
-    <Content Include="Content\images\And_column.png" />
+    <Content Include="Content\images\A_column.png" />
+    <Content Include="Content\images\B_column.png" />
+    <Content Include="Content\images\S_column.png" />
+    <Content Include="Content\images\_And_column.png" />
     <Content Include="Content\images\B0_Car.png" />
     <Content Include="Content\images\B1_Room.png" />
-    <Content Include="Content\images\B_column.png">
+    <Content Include="Content\images\_B_column.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\images\BS_Portal_Homepage_Backgrond.png">
@@ -291,7 +294,7 @@
     <Content Include="Content\images\R_column.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\images\S_column.png" />
+    <Content Include="Content\images\_S_column.png" />
     <Content Include="Content\images\Scolumn.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

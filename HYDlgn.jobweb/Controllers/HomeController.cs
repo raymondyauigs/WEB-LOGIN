@@ -29,7 +29,7 @@ namespace HYDlgn.jobweb.Controllers
             model.Groups = new[] { "B", "S", "T" };
             model.Links = new List<SystemLinkModel>();
             model.Links.AddRange(sttService.GetSettingFor(DK.SETT_COMMONPFX).Select(e => new SystemLinkModel { LinkName = e.Key, Url = e.Value, LinkGroup = "B", ImagePrefix="B" }));
-            model.Links.AddRange(sttService.GetSettingFor(DK.SETT_SYSTEMPFX).Select(e => new SystemLinkModel { LinkName = e.Key, Url = e.Value, LinkGroup = "S", ImagePrefix="And" }));
+            model.Links.AddRange(sttService.GetSettingFor(DK.SETT_SYSTEMPFX).Select(e => new SystemLinkModel { LinkName = e.Key, Url = e.Value, LinkGroup = "S", ImagePrefix="A" }));
             model.Links.AddRange(sttService.GetSettingFor(DK.SETT_PROJCTPFX).Select(e => new SystemLinkModel { LinkName = e.Key, Url = e.Value, LinkGroup = "T", ImagePrefix="S" }));
 
             return View(model);

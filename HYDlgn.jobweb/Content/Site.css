@@ -707,7 +707,19 @@ body.layoutbg-pic {
 a.navbar-brand.layoutheader-name[login='false'] {
     display:none;
 }
+.layoutheader-BackPos-login{
+    top: 20px;
+    left:20px;
+    position:absolute;
 
+}
+.layoutheader-BackPos-login[login='false'] {
+    display: none;
+}
+
+.nav-bg-main .layoutheader-BackPos[login='true'] {
+    display: none;
+}
 .contactfooter[login='true'] {
     display: none;
 }
