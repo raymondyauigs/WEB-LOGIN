@@ -48,7 +48,7 @@ namespace HYDlgn.jobweb.Service
 
             bool isReset = false;
 
-            var founduser = AppManager.UserState == null ? null : db.CoreUsers.FirstOrDefault(y => y.UserId == AppManager.UserState.UserID);
+            var founduser = AppManager.UserState == null ? null : db.CoreUsers.FirstOrDefault(y => y.UserId == AppManager.UserState.UserID && !y.Disabled);
 
             //lg.LogMisc($"your url info: {baseurl} + {currentPath} + {httpContext.Request.Url}");
 

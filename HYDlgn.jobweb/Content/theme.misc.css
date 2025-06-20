@@ -68,11 +68,17 @@ p {
 }
 .ribbon[login]{
     background-color:rgb(61, 90, 61,0);
+    
 }
-main.login-page-wrapper {
-    margin-top: 250px;
-
+.ribbon[passwordchg]{
+    opacity: 0.5;
 }
+    .ribbon[passwordchg]+ div.card-container{
+        margin-top: -35vh;
+    }
+    main.login-page-wrapper {
+        margin-top: 250px;
+    }
 
 .ribbon[snapshot] {
     background-color: rgb(138, 67, 138);

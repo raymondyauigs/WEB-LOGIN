@@ -143,7 +143,7 @@ namespace HYDlgn.Service
                 var enpassword = ph.HashPassword(password);
 
 
-                var u = db.CoreUsers.FirstOrDefault(y => y.UserId == userid);
+                var u = db.CoreUsers.FirstOrDefault(y => y.UserId == userid && !y.Disabled);
                 if (u != null)
                 {
 
@@ -247,7 +247,7 @@ namespace HYDlgn.Service
         public bool LoginUser(string userid, string password, string editedby)
         {
             var ph = new PasswordHasher();
-            var user = db.CoreUsers.FirstOrDefault(y => userid == y.UserName || userid == y.UserId || userid== y.post);
+            var user = db.CoreUsers.FirstOrDefault(y => (userid == y.UserName || userid == y.UserId || userid== y.post) && !y.Disabled);
             if (user == null)
                 return false;
 

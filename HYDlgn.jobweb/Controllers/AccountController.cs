@@ -143,7 +143,7 @@ namespace HYDlgn.jobweb.Controllers
         {
             ViewBag.ContentWidth = "";
             var userid = AppManager.UserState.UserID;
-            var changeuser = _db.CoreUsers.FirstOrDefault(y => y.UserId == userid);
+            var changeuser = _db.CoreUsers.FirstOrDefault(y => y.UserId == userid && !y.Disabled);
             ViewBag.RedirectUrl = changeuser.IsAdmin ? Url.Action("Index", "Account") : Url.Action("Index", "Home");
 
             var model = new ChangePasswordModel { Id = changeuser.Id, UserName = changeuser.UserId, ReturnUrl = ReturnUrl ?? Request.UrlReferrer.PathAndQuery };
@@ -288,7 +288,7 @@ namespace HYDlgn.jobweb.Controllers
             //var user = userService.EditUser("001", account,AppManager.WindowUser, password);
 
 
-            var user = _db.CoreUsers.FirstOrDefault(y => y.UserName == account || y.UserId == account || y.post == account);
+            var user = _db.CoreUsers.FirstOrDefault(y => (y.UserName == account || y.UserId == account || y.post == account) && !y.Disabled);
 
             if (userService.LoginUser(account, password, AppManager.WindowUser))
             {
