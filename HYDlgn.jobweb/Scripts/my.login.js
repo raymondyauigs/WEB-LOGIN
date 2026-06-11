@@ -19,11 +19,12 @@ function setupLoginBtn(loginbtn) {
 
 
 function Login() {
+    var returnUrl = uicontrolLib.Core.sanitizeUrlVanilla($('#returnUrl').val());
     var paras =
     {
         account: $("#account").val(),
         password: $("#password").val(),
-        returnUrl: $('#returnUrl').val(),
+        returnUrl: returnUrl,
         __RequestVerificationToken: $('input[name="__RequestVerificationToken').val(),
     };
 
@@ -43,8 +44,8 @@ function Login() {
                 alertLib.Core.alert('Login Result', result =='n' ? 'Login Failed': result, 'Close', { mode: 'danger' });
 
             } else {
-
-                window.location.href = result.returnUrl;
+                var resulturl = uicontrolLib.Core.sanitizeUrlVanilla(result.returnUrl);
+                window.location.href = resulturl;
 
             }
         }

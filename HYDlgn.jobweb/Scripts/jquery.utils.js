@@ -21,7 +21,43 @@
         keyCode: 27,
       })
     );
-  }
+    }
+    function sanitizeUrlVanilla(url) {
+        if (!url || typeof url !== 'string') {
+            return '/';
+        }
+
+        // 1. Decode the URL completely to uncover obfuscated or URL-encoded XML tags (e.g., %3Cxml%3E)
+        const decodedUrl = decodeURIComponent(url).trim();
+
+        // 2. Block Inline XML/XSL payloads hidden in query parameters or hash fragments
+        if (decodedUrl.includes('<xml') || decodedUrl.includes('<xsl:') || decodedUrl.includes('stylesheet')) {
+            console.warn("Blocked URL: Inline XML/XSL code detected in string.");
+            return '/';
+        }
+
+        // 3. Create the dummy link element for structural parsing
+        const link = document.createElement('a');
+        link.href = url;
+
+        // 4. Block data: and javascript: protocols (Stops base64 inline data-injection)
+        if (link.protocol === 'javascript:' || link.protocol === 'data:' || link.protocol === 'file:') {
+            console.warn(`Blocked URL: Unsafe protocol scheme: ${link.protocol}`);
+            return '/';
+        }
+
+        // 5. Block file extensions for hosted external payloads
+        const pathname = link.pathname.toLowerCase();
+        const bannedExtensions = ['.xml', '.xsl', '.xslt'];
+        const hasDangerousExtension = bannedExtensions.some(ext => pathname.endsWith(ext));
+
+        if (hasDangerousExtension) {
+            console.warn("Blocked URL: Dangerous file extension found.");
+            return '/';
+        }
+
+        return link.href;
+    }
 
   function hideshowSection(choiceselector, ishide, parentselector) {
     var sectionlist = [];
