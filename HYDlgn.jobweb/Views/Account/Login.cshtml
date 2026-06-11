@@ -26,6 +26,9 @@
                         
                         
                         @Html.GetPassword(e => e.password, 4, true)
+
+                        @Html.HiddenFor(e=> e.returnUrl)
+
                     </div>
 
 
