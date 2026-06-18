@@ -58,6 +58,11 @@ namespace HYDlgn.Framework.Model
         public string Order { get; set; }
     }
 
+    public class BaseSetting
+    {
+        public string SearchSep { get; set; }
+		public string BaseUrl { get; set; }
+    }
 
     public class JsonSearchClass : IBelongtoTable
     {

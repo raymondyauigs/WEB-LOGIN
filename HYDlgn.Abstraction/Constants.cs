@@ -507,7 +507,7 @@ namespace HYDlgn.Abstraction
             public const string NotUsedItem = "*(Not Used)";
             public const string AllItems = "(All {0})";
             public const string ERROR_MESSAGE = "__Error_Message__";
-
+            public const string SearchSep = "$";
 
 
 

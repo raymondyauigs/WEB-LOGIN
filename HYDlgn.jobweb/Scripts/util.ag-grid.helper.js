@@ -322,7 +322,8 @@
     if (!rowcountselector) {
       rowcountselector = "#rowcount";
     }
-    let data = initdata;
+      let data = initdata;
+      var basesetting = uiLb.Core.getBaseSetting();
     const dataSource = {
       getRawData: function () {
         return data;
@@ -350,16 +351,16 @@
 
             Object.keys(params.filterModel).forEach(function (v, i) {
               if (params.filterModel[v].type == "contains" && params.filterModel[v].filter) {
-                search += params.filterModel[v].filter.replace("&", "`3").replace("/", "`8") + "!";
-                type += v + "!";
+                  search += params.filterModel[v].filter.escapeUrlStr() + basesetting.SearchSep;
+                  type += v + basesetting.SearchSep;
                 hit = true;
               } else if (params.filterModel[v].type && params.filterModel[v].filter.trimEnd() == params.filterModel[v].type) {
-                search += params.filterModel[v].type.replace("&", "`3").replace("/", "`8") + "!";
-                type += v + "!";
+                  search += params.filterModel[v].type.escapeUrlStr() + basesetting.SearchSep;
+                type += v +  basesetting.SearchSep;
                 hit = true;
               } else if (params.filterModel[v].filter) {
-                search += params.filterModel[v].filter.replace("&", "`3").replace("/", "`8") + "!";
-                type += v + "!";
+                  search += params.filterModel[v].filter.escapeUrlStr() + basesetting.SearchSep;
+                type += v +  basesetting.SearchSep;
                 hit = true;
               }
             });

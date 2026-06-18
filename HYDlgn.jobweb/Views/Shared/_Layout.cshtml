@@ -1,5 +1,6 @@
 ﻿@using HYDlgn.Abstraction
 @using HYDlgn.jobweb.Tools
+@using HYDlgn.Framework.Model
 
 @{
     var TagId = (int)(HttpContext.Current.Session[Constants.Session.TagId] ?? 0);
@@ -50,6 +51,13 @@
     }
 
     var hiddenAccountbtn = isAdmin ? "" : "hidden";
+
+    var baseSetting = new BaseSetting
+    {
+        SearchSep = Constants.DT.SearchSep,
+        BaseUrl = Url.Content("~/"),
+    };
+
 
 
 }
@@ -132,22 +140,26 @@
         </p>
     </div>
     @Html.ActionLink(LayoutName, "Index", "Home", new { area = "" }, new { @class = "navbar-brand header-bg-main layoutheader-name", login = loginattr })
-    <div class="container body-content @ViewBag.ContentWidth">
+<div class="container body-content @ViewBag.ContentWidth">
 
 
-        @RenderBody()
-        
-        <div class="clearcontainer origin hidden" tabindex="0" aria-label="clear" role="button">
-            <span class="clearwrap">
-                <svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                    <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z">
-
-                    </path>
-                </svg>
-            </span>
-        </div>
+    @RenderBody()
+    <div class="hidden" id="basesetting">
+        @Html.Hidden("base_" + nameof(BaseSetting.SearchSep), baseSetting.SearchSep)
+        @Html.Hidden("base_" + nameof(BaseSetting.BaseUrl), baseSetting.BaseUrl)
 
     </div>
+    <div class="clearcontainer origin hidden" tabindex="0" aria-label="clear" role="button">
+        <span class="clearwrap">
+            <svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z">
+
+                </path>
+            </svg>
+        </span>
+    </div>
+
+</div>
     <footer class="contactfooter" login="@loginattr">
         <h3>Contact Us</h3>
         <div class="contact-info">
@@ -172,17 +184,7 @@
         </div>
 
     </footer>
-    <script>
 
-        var _isAdmin = @(isAdmin.ToString().ToLower());
-        var _isPower = @(isPower.ToString().ToLower());
-        var _userid = "@(TagId >0 ? $"u!{TagId}": $"!restricted")";
-        var _baseUrl = "@Url.Content("~/")";
-        var _autocompletebaseUrl = "@Url.Content("~/api/autocomplete/")";
-
-        var _tooltipinboxselector = "#inbox-tooltip";
-
-    </script>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

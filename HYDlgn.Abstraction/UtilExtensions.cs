@@ -640,13 +640,13 @@ namespace HYDlgn.Abstraction
 
         }
 
-        public static string ItRevertAmpSign(this string str,string sub="--")
+        public static string ItRevertAmpSign(this string str)
         {
-            return (str ?? "").Replace("&", "--");
+            return (str ?? "").Replace("&", "`3").Replace("\\", "`1").Replace("/", "`8").Replace("!", "`2");
         }
-        public static string ItRestoreAmpSign(this string str,string sub="--")
+        public static string ItRestoreAmpSign(this string str)
         {
-            return (str ?? "").Replace("--", "&");
+            return (str ?? "").Replace("`3", "&").Replace("`1", "\\").Replace("`8", "/").Replace("`2", "!");
         }
         public static string ItSubStr(this string strval,string sep="_")
         {
@@ -655,7 +655,7 @@ namespace HYDlgn.Abstraction
             return strval.Substring(strval.IndexOf(sep)+1);
         }
 
-        public static Dictionary<string,string> ZipStrPair(string values,string fields,string sep= "!")
+        public static Dictionary<string,string> ZipStrPair(string values,string fields,string sep= Constants.DT.SearchSep)
         {
             if (string.IsNullOrEmpty(values) || string.IsNullOrEmpty(fields))
                 return new Dictionary<string, string>();
