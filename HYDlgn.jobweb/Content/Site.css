@@ -756,7 +756,11 @@ a.navbar-brand.layoutheader-name[login='false'] {
     .contact-info div p {
         font-size: smaller;
         font-style: normal;
-        color: #727070;
+        font-weight: 700;
+        color: white;
+        background-color: rgba(114, 112, 112, 0.5); 
+        padding: 1px;
+        border-radius: 2px;
     }
 
 
